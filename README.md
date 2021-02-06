@@ -38,8 +38,7 @@
 - Windows定时任务程序
 
 # 说明
-- 本项目参考
-  - https://github.com/ZimoLoveShuang/auto-submit
+- 本项目参考https://github.com/ZimoLoveShuang/auto-submit，并重新对新页面进行了抓包解析
 - 感谢Zimo提供的金智教务系统登录API
   - http://www.zimo.wiki:8080/wisedu-unified-login-api-v1.0/swagger-ui.html#/api-controller
 
