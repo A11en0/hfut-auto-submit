@@ -143,11 +143,7 @@ def queryForm(session, apis):
     #     # bug，传空值，返回所有数据
     #     # res = session.post(mrqkbd_url, headers=headers, data="")
     #     # print(len(res.json()))
-    #     # a = res.json()['datas']['mrqkbd']['rows']
-    #     # b = json.dumps(a)
-    #     # f2 = open('new_json.json', 'w')
-    #     # f2.write(b)
-    #     # f2.close()
+    #     # mrqk = res.json()['datas']['mrqkbd']['rows']
 
     # 偷懒做法，直接俄合并三个查询表单，下一步中填充使用
     form = {**getZxpaxx, **jbxx, **mrbpabd}
