@@ -19,7 +19,7 @@
 2. 安装依赖程序
   `pip install -r requirements.txt`
 3. 注册用于签到提醒的邮箱（建议使用163），并开启smtp功能。[如何开启smtp？](http://mail.163.com/html/mail5faq/130520/page/5R7P6CJ600753VB8.htm)
-4. 填写config.yml中users/user中的字段，并将刚刚注册好的smtp邮箱填写到`config.yml`的Info当中。当让，你也可以通过配置多个user来开启多用户自动签到模式
+4. 填写config.yml中users/user中的字段，并将刚刚注册好的smtp邮箱填写到`config.yml`的Info当中。当然，你也可以通过配置多个user来开启多用户自动签到模式
 5. 运行python index.py，查看邮件提醒
 
 # 基本思路

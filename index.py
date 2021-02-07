@@ -3,8 +3,6 @@ import sys
 import requests
 import json
 import yaml
-import oss2
-from urllib.parse import urlparse
 from datetime import datetime, timedelta, timezone
 from urllib3.exceptions import InsecureRequestWarning
 import smtplib
@@ -98,20 +96,25 @@ def queryForm(session, apis):
     info = {
         'TBSJ': '%s' % dqrq
     }
+    # hasFilled = False
 
     # 判断是否已经填报
     checkFilled_url = 'http://stu.hfut.edu.cn/xsfw/sys/xsyqxxsjapp/mrbpa/checkFilled.do'
     res = session.post(checkFilled_url, headers=headers, data={'data': '%s' % info})
     if len(res.json()['data']):
+        # hasFilled = True
         log("已经填报，请勿重复填报!")
         exit(-1)
 
+    # 基本信息表单，保存下来用于后续提交
     getjbxx_url = 'http://stu.hfut.edu.cn/xsfw/sys/xsyqxxsjapp/mrbpa/getJbxx.do'
     res = session.post(getjbxx_url, headers=headers, data="data={}")
     jbxx = res.json()['data']
+    # WID参数用于查询`mrqkbd.do`表单内容，暂未用到
     # WID = res.json()["data"]["WID"]
     # print(jbxx)
 
+    # 每日报平安表单，保存下来用于后续提交
     mrbpabd_url = 'http://stu.hfut.edu.cn/xsfw/sys/xsyqxxsjapp/modules/mrbpa/mrbpabd.do'
     res = session.post(mrbpabd_url, headers=headers, data="")
     mrbpabd = res.json()['datas']['mrbpabd']['rows'][0] # 基本信息表单
@@ -120,16 +123,46 @@ def queryForm(session, apis):
         exit(-1)
     # print(mrbpabd)
 
+    # 获取最新表单中的内容，保存下来用于后续提交
     getZxpaxx_url = 'http://stu.hfut.edu.cn/xsfw/sys/xsyqxxsjapp/mrbpa/getZxpaxx.do'
     res = session.post(getZxpaxx_url, headers=headers, data="data={}")
     getZxpaxx = res.json()['data']
     # print(getZxpaxx)
 
-    # 合并三个查询表单
+    # if hasFilled:
+    #     getZxpaxx_url = 'http://stu.hfut.edu.cn/xsfw/sys/xsyqxxsjapp/mrbpa/getZxpaxx.do'
+    #     res = session.post(getZxpaxx_url, headers=headers, data="data={}")
+    #     getZxpaxx = res.json()['data']
+    #     print(getZxpaxx)
+    #
+    # else:
+    #     # 已填报，直接查看`每日情况`表单
+    #     mrqkbd_url = 'http://stu.hfut.edu.cn/xsfw/sys/xsyqxxsjapp/modules/mrbpa/mrqkbd.do'
+    #     res = session.post(mrqkbd_url, headers=headers, data={"WID": WID})
+    #     mrqk = res.json()['datas']['mrqkbd']['rows'][0]
+    #     # bug，传空值，返回所有数据
+    #     # res = session.post(mrqkbd_url, headers=headers, data="")
+    #     # print(len(res.json()))
+    #     # a = res.json()['datas']['mrqkbd']['rows']
+    #     # b = json.dumps(a)
+    #     # f2 = open('new_json.json', 'w')
+    #     # f2.write(b)
+    #     # f2.close()
+
+    # 偷懒做法，直接俄合并三个查询表单，下一步中填充使用
     form = {**getZxpaxx, **jbxx, **mrbpabd}
 
+    # 替换None值为空字符
+    for k, v in form.items():
+        if v == 'None':
+            form[k] = ''
+
     # 在表单中更新填报时间
-    form['TBSJ'] = dqrq
+    # 此处通过修改WID可以控制提交到列表中的哪个表项
+    form['TBSJ'] = dqrq # 十分重要，用于查找最新的表单信息
+    # form['TBSJ'] = "2021-02-07"
+    # form['WID'] = '6497987c5cca47228bc71cfb5e8e449c'
+    # print(form)
     return form
 
 def fillForm(session, form):
@@ -203,19 +236,16 @@ def fillForm(session, form):
     # mrqk["DZ_SFSB"] = "1"
     # mrqk["BY1"] = "1"
 
-    for k, v in JBXX.items():
+    for k in JBXX:
         if k in form:
-            val = form[k]
-            if val == 'None':
-                val = ''
-            JBXX[k] = val
+            # val = form[k]
+            # if val == 'None':
+            #     val = ''
+            JBXX[k] = form[k]
 
-    for k, v in MRQK.items():
+    for k in MRQK:
         if k in form:
-            val = form[k]
-            if val == 'None':
-                val = ''
-            MRQK[k] = val
+            MRQK[k] = form[k]
 
     info = {
         'JBXX': "%s" % JBXX,
