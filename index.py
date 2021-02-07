@@ -103,8 +103,9 @@ def queryForm(session, apis):
     res = session.post(checkFilled_url, headers=headers, data={'data': '%s' % info})
     if len(res.json()['data']):
         # hasFilled = True
-        log("已经填报，请勿重复填报!")
-        exit(-1)
+        log("已填报.")
+        # log("已填报，请勿重复填报!")
+        # exit(-1)
 
     # 基本信息表单，保存下来用于后续提交
     getjbxx_url = 'http://stu.hfut.edu.cn/xsfw/sys/xsyqxxsjapp/mrbpa/getJbxx.do'
