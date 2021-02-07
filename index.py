@@ -364,11 +364,11 @@ def main_handler(event, context):
                     log('自动提交失败...')
                     log('错误是' + msg)
                     InfoSubmit('自动提交失败！错误是' + msg, user['user']['email'])
-                    exit(-1)
+                    # exit(-1)
             else:
                 log('模拟登陆失败...')
                 log('原因可能是学号或密码错误，请检查配置后，重启脚本...')
-                exit(-1)
+                # exit(-1)
     except Exception as e:
         InfoSubmit("出现问题了！" + str(e))
         raise e
