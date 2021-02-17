@@ -159,9 +159,8 @@ def queryForm(session, apis):
     # 在表单中更新填报时间
     # 此处通过修改WID可以控制提交到列表中的哪个表项
     form['TBSJ'] = dqrq # 十分重要，用于查找最新的表单信息
-    # form['TBSJ'] = "2021-02-07"
-    # form['WID'] = '6497987c5cca47228bc71cfb5e8e449c'
-    # print(form)
+    # form['TBSJ'] = "2021-02-01"
+    form['WID'] = '' # 十分重要，提交时无需使用WID参数，否则会覆盖前一天的提交
     return form
 
 def fillForm(session, form):
@@ -366,11 +365,11 @@ def main_handler(event, context):
                     log('自动提交失败...')
                     log('错误是' + msg)
                     InfoSubmit('自动提交失败！错误是' + msg, user['user']['email'])
-                    exit(-1)
+                    # exit(-1)
             else:
                 log('模拟登陆失败...')
                 log('原因可能是学号或密码错误，请检查配置后，重启脚本...')
-                exit(-1)
+                # exit(-1)
     except Exception as e:
         InfoSubmit("出现问题了！" + str(e))
         raise e
@@ -383,3 +382,7 @@ if __name__ == '__main__':
     print(main_handler({}, {}))
     # for user in config['users']:
     #     log(getCpdailyApis(user))
+
+
+
+
