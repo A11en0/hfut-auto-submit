@@ -27,8 +27,10 @@ headers = {
         'Accept-Language': 'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7',
 }
 
+yml_file_path = '/home/allen/Code/python/hfut-auto-summit/config.yml'
+
 # 读取yml配置
-def getYmlConfig(yaml_file='config.yml'):
+def getYmlConfig(yaml_file=yml_file_path):
     file = open(yaml_file, 'r', encoding="utf-8")
     file_data = file.read()
     file.close()
@@ -36,7 +38,7 @@ def getYmlConfig(yaml_file='config.yml'):
     return dict(config)
 
 # 全局配置
-config = getYmlConfig(yaml_file='config.yml')
+config = getYmlConfig(yml_file_path)
 
 # 获取当前utc时间，并格式化为北京时间
 def getTimeStr():
@@ -257,7 +259,7 @@ def submitForm(session, payload):
     msg = res.json()['msg']
     return msg
 
-title_text = '今日校园疫结果通知'
+title_text = '今日校园疫情填报结果通知'
 
 # 发送邮件通知
 def sendMessage(send, msg):
