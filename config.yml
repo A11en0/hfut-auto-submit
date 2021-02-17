@@ -5,17 +5,17 @@ login:
 #用户组配置
 users:
   #单个用户配置
-  - user:
-      #username 学号或者工号
-      username: '2020111071'
-      #password 密码
-      password: '086632'
-      #address 地址，定位信息
-      address: 安徽省合肥市蜀山区合肥工业大学
-      #email 接受通知消息的邮箱
-      email: 3056093918@qq.com
-      #school 学校全称
-      school: 合肥工业大学
+#  - user:
+#      #username 学号或者工号
+#      username: '2020111071'
+#      #password 密码
+#      password: '086632'
+#      #address 地址，定位信息
+#      address: 安徽省合肥市蜀山区合肥工业大学
+#      #email 接受通知消息的邮箱
+#      email: 3056093918@qq.com
+#      #school 学校全称
+#      school: 合肥工业大学
   - user:
       #username 学号或者工号
       username: '2020111104'

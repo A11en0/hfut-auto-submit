@@ -157,9 +157,8 @@ def queryForm(session, apis):
     # 在表单中更新填报时间
     # 此处通过修改WID可以控制提交到列表中的哪个表项
     form['TBSJ'] = dqrq # 十分重要，用于查找最新的表单信息
-    # form['TBSJ'] = "2021-02-07"
-    # form['WID'] = '6497987c5cca47228bc71cfb5e8e449c'
-    # print(form)
+    form['TBSJ'] = "2021-02-01"
+    form['WID'] = 'b70325a58b05452689e67b025143ca1d' # 十分重要，提交时无需使用WID参数，否则会覆盖前一天的提交
     return form
 
 def fillForm(session, form):
@@ -381,3 +380,7 @@ if __name__ == '__main__':
     print(main_handler({}, {}))
     # for user in config['users']:
     #     log(getCpdailyApis(user))
+
+
+
+
