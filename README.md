@@ -35,6 +35,9 @@
 
 ### 使用本地服务器
 - Linux下的Cron程序
+  > `crontab -e`
+   
+  编辑以下内容到文件尾:
   `05 14 * * * python /MY_PATH/hfut-auto-summit/index.py > hfut-as.log 2>&1 &`
   
 - Windows定时任务程序
