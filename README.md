@@ -35,6 +35,8 @@
 
 ### 使用本地服务器
 - Linux下的Cron程序
+  `05 14 * * * python /MY_PATH/hfut-auto-summit/index.py > hfut-as.log 2>&1 &`
+  
 - Windows定时任务程序
 
 # 说明
