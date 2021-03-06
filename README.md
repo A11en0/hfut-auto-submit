@@ -7,7 +7,7 @@
 - `config.yml` 默认配置文件
 - `index.py` 完成自动提交的py脚本
 - `requirements.txt` py依赖库以及版本说明文件
-
+- `save_data.json` 提交保存的POST请求数据包
 # 运行环境
 - `python 3.x`
 
@@ -35,6 +35,11 @@
 
 ### 使用本地服务器
 - Linux下的Cron程序
+  `> crontab -e`
+  
+  编辑以下内容到文件尾:
+  > 05 14 * * * python /MY_PATH/hfut-auto-summit/index.py > hfut-as.log 2>&1 &
+  
 - Windows定时任务程序
 
 # 说明
@@ -44,3 +49,4 @@
   - http://www.zimo.wiki:8080/wisedu-unified-login-api-v1.0/swagger-ui.html#/api-controller
 
 *发现Bug请提交issue，我会在第一时间解决问题，感谢！*
+
