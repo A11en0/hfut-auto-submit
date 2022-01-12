@@ -45,6 +45,3 @@
   - https://github.com/ZimoLoveShuang/auto-submit
 - 感谢Zimo提供的金智教务系统登录API
   - http://www.zimo.wiki:8080/wisedu-unified-login-api-v1.0/swagger-ui.html#/api-controller
-
-*发现Bug请提交issue，我会在第一时间解决问题，感谢！*
-
