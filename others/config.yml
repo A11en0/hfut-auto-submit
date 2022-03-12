@@ -1,0 +1,29 @@
+#登陆相关配置
+users:
+  #单个用户配置
+  - user:
+      #username 学号或者工号    
+      username: 'xxxxxxx'
+      #password 密码
+      password: 'xxxx'
+      #address 地址，定位信息，看看手动打卡的时候，最下面这一行填报地址的内容
+      location: 安徽省合肥市蜀山区合欢路
+      #email 接受通知消息的邮箱
+      email: xxxxx@qq.com
+
+# #多人配置
+#  - user:
+#      #username 学号或者工号    
+#      username: 'xxx'
+#      #password 密码
+#      password: 'xxx'
+#      #address 地址，定位信息
+#      location: xxx
+#      #email 接受通知消息的邮箱
+#      email: xxx
+
+Email:
+  server: smtp.163.com # 填写邮件的smtp服务器，百度一下：qq/163等等邮箱smtp服务器，即可
+  name: 'liujilong0116' # 填写对应邮件服务器的端口号，百度一下你就知道
+  password: 'xxx' # 邮件服务器登录授权码，在邮箱设置里可创建
+  account: 'xxx' # 邮件服务器登录用户名（发件人）
